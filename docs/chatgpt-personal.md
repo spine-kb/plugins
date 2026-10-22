@@ -1,59 +1,69 @@
-# ChatGPT: личные аккаунты
+# ChatGPT: personal accounts
 
-У сотрудников отдельные personal аккаунты. Общий workspace здесь означал бы
-организацию ChatGPT с администратором и управляемым каталогом; для выбранной
-схемы он не предполагается.
+Employees have separate personal accounts. A shared workspace here would mean a
+ChatGPT organization with an administrator and a managed catalog; the selected
+setup does not assume one.
 
-## Прямое подключение MCP
+## Direct MCP connection
 
-Текущий официальный developers flow описывает создание подключения через ChatGPT
-web: Plugins → Add custom MCP server → имя Spine → URL
-`https://spine.pavorik.com/mcp` → OAuth → Create as a plugin → Install. Затем
-открыть новый чат и выбрать `@Spine`. Это документированный порядок.
+The current official developer flow describes creating a connection in ChatGPT
+web: Plugins → Add custom MCP server → name Spine → URL
+`https://spine.pavorik.com/mcp` → OAuth → Create as a plugin → Install. Then
+open a new chat and select `@Spine`. This is the documented procedure.
 [Add custom MCP server](https://developers.openai.com/api/docs/guides/custom-mcp-server).
 
-В авторизованном UI доступного аккаунта 2026-10-22 read-only подтверждены
-Plugins → Add → Create plugin, Upload plugin archive и Add custom MCP server.
-Форма custom MCP показывает Server URL/Tunnel, OAuth и дополнительные OAuth
-настройки. Создание подключения, принятие ZIP, OAuth и вызовы Spine не
-выполнялись. Эти controls не требуют для этого сценария общего workspace или
-администратора команды.
+A read-only inspection of the available account's authenticated UI on 2026-10-22
+confirmed Plugins → Add → Create plugin, Upload plugin archive, and Add custom
+MCP server. The custom MCP form shows Server URL/Tunnel, OAuth, and additional
+OAuth settings. During that initial inspection, no connection was created, ZIP
+accepted, OAuth completed, or Spine calls made. These controls do not require a
+shared workspace or team administrator for this scenario.
 
-Официальные страницы не дают согласованной personal plan/surface matrix. Help
-описывает custom MCP для Business/Enterprise/Edu и web-only, но FAQ той же
-страницы допускает Pro read/fetch. Developers flow говорит о personal plugins и
-read/write tools subject to account policies. Поэтому full write и mobile для
-personal custom MCP пока остаются непроверенными возможностями.
-[Help: подключение custom MCP](https://help.openai.com/en/articles/12584461-connecting-custom-mcp-servers-in-chatgpt).
+A later attempt to open the ChatGPT Plugins page failed with "ChatGPT hit a
+snag". The web archive installation route remains untested. Separately, a direct
+`mcp__codex_apps__spine_doc_open` call through the existing connected MCP
+succeeded in this Codex session with `structuredContent.ok=true`. No new OAuth
+flow, write, or client package installation was performed. This read does not
+verify ChatGPT web archive installation, independent personal accounts, mobile,
+or bootstrap skill delivery and bare-link tool selection.
 
-## Роль GitHub-пакета
+The official pages do not provide a consistent matrix of personal plans and
+surfaces. Help describes custom MCP for Business/Enterprise/Edu and web only,
+but the same page's FAQ allows Pro read/fetch. The developer flow mentions
+personal plugins and read/write tools subject to account policies. Full write
+support and mobile support for personal custom MCP therefore remain unverified
+capabilities.
+[Help: connecting custom MCP](https://help.openai.com/en/articles/12584461-connecting-custom-mcp-servers-in-chatgpt).
 
-Git marketplace из этого каталога предназначен для локальных Codex/desktop
-клиентов. Он не является доказанной установкой cloud-интеграции в personal
-web/mobile. Прямой GitHub import в просмотренном Add menu не наблюдался; это не
-доказывает его отсутствие во всех UI. Документированный workspace import
-является отдельным способом. Personal Upload plugin archive виден, но
-принимаемый формат архива и возможности установленного через него пакета ещё не
-проверены.
+## Role of the GitHub package
+
+The Git marketplace in this repository is intended for local Codex/desktop
+clients. It is not a proven way to install a cloud integration in personal
+web/mobile. Direct GitHub import was not observed in the inspected Add menu;
+this does not prove it is absent from every UI. The documented workspace import
+is a separate method. Personal Upload plugin archive is visible, but the
+accepted archive format and the capabilities of a package installed through it
+have not yet been verified.
 [GitHub import](https://learn.chatgpt.com/docs/enterprise/plugin-management),
-[upload и ограничения поверхности](https://help.openai.com/en/articles/20001256-plugins-in-chatgpt).
+[upload and surface limitations](https://help.openai.com/en/articles/20001256-plugins-in-chatgpt).
 
-Для personal cross-account remote sharing и повторного использования одного app
-ID документированное решение не установлено. Поэтому здесь нет `.app.json`,
-выдуманной общей регистрации или cloud manifest с placeholder. Публичная
-directory submission после review — отдельный документированный способ
-распространения; он пока не выбран и не выполнялся.
-[Публикация](https://developers.openai.com/plugins/deploy/submission).
+No documented solution has been established for personal cross-account remote
+sharing and reuse of a single app ID. This repository therefore has no
+`.app.json`, invented shared registration, or cloud manifest with a placeholder.
+Public directory submission after review is a separate documented distribution
+method; it has not been selected or performed.
+[Publication](https://developers.openai.com/plugins/deploy/submission).
 
-## Что проверить на доступном аккаунте
+## What to verify on an available account
 
-После отдельного согласования создания подключения пройти OAuth, проверить
-чтение и запись тестового документа в web, затем тот же аккаунт в desktop/mobile
-и независимый personal аккаунт. Отдельно проверить установку bootstrap skill и
-выбор `doc_open` по голой ссылке. Наличие MCP само по себе не доказывает
-доставку skill или передачу чат-вложений.
+After separately agreeing to create a connection, complete OAuth, check reading
+and writing a test document in web, then test the same account in desktop/mobile
+and an independent personal account. Separately check installation of the
+bootstrap skill and selection of `doc_open` from a bare link. The presence of
+MCP alone does not prove skill delivery or transfer of chat attachments.
 
-После изменения tool metadata официальный custom-connection flow требует Refresh
-подключения и нового чата. Текст guide извлекается с сервера при работе, поэтому
-обновление guide не требует его копии в skill.
-[Проверка и обновление metadata](https://developers.openai.com/plugins/deploy/connect-chatgpt).
+After tool metadata changes, the official custom connection flow requires
+refreshing the connection and starting a new chat. The guide text is retrieved
+from the server during use, so updating the guide does not require a copy in the
+skill.
+[Testing and refreshing metadata](https://developers.openai.com/plugins/deploy/connect-chatgpt).

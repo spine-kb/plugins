@@ -1,23 +1,24 @@
-# Gemini: личные аккаунты в web и mobile
+# Gemini: personal accounts on web and mobile
 
-Gemini web/mobile подключается прямо к remote MCP; GitHub-плагин Antigravity не
-устанавливает это подключение и не переносит туда свой skill.
+Gemini web/mobile connects directly to remote MCP; the Antigravity GitHub plugin
+does not install this connection or transfer its skill there.
 
-Документированный порядок: Gemini web → Settings → Connected Apps → Custom apps
-→ Add a custom app → `https://spine.pavorik.com/mcp` → дальнейшая авторизация.
-При поддержке DCR не требуется вручную публиковать клиентские секреты. После
-подключения custom app доступен в web и mobile; явное `@Spine` позволяет выбрать
-его для запроса.
-[Официальная инструкция](https://support.google.com/gemini/answer/17209137?hl=en-yt).
+The documented procedure is: Gemini web → Settings → Connected Apps → Custom
+apps → Add a custom app → `https://spine.pavorik.com/mcp` → continue
+authentication. With DCR support, client secrets do not need to be published
+manually. Once connected, the custom app is available on web and mobile; an
+explicit `@Spine` selects it for a request.
+[Official instructions](https://support.google.com/gemini/answer/17209137?hl=en-yt).
 
-На 2026-10-22 Google указывает ограничения: personal Google Account, возраст
-18+, нахождение в US, English и включённый Keep Activity. Work/school accounts
-не поддержаны. Фактическая доступность в аккаунтах команды, авторизация Spine и
-перенос в mobile ещё не проверены. Для write actions Google сейчас указывает
-ручное подтверждение.
+As of 2026-10-22, Google lists these restrictions: a personal Google Account,
+age 18+, location in the US, English, and Keep Activity enabled. Work/school
+accounts are unsupported. Actual availability on team accounts, Spine
+authentication, and carryover to mobile have not yet been verified. Google
+currently specifies manual confirmation for write actions.
 
-На сервере должны быть понятные instructions и tool descriptions, поскольку
-доставка нашего CLI bootstrap skill в Gemini Apps не установлена. Проверить на
-новом чате как голую ссылку, так и ссылку с `@Spine`: выбранный инструмент,
-целевой B из `/d/A/p/B`, актуальный guide и интерпретацию документа вместе с
-сообщением пользователя. Передачу медиа из чат-вложения проверять отдельно.
+The server must provide clear instructions and tool descriptions, since delivery
+of our CLI bootstrap skill to Gemini Apps has not been established. In a new
+chat, test both a bare link and a link with `@Spine`: the selected tool, target
+B from `/d/A/p/B`, the current guide, and interpretation of the document
+together with the user's message. Test transfer of media from chat attachments
+separately.

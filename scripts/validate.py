@@ -70,6 +70,21 @@ def main():
             config = parsed[package_root / "mcp_config.json"]
             expected = {"mcpServers": {"spine": {"serverUrl": ENDPOINT}}}
         else:
+            require(
+                manifest["author"]["name"] == "SpineDev",
+                f"Wrong plugin author: {package}",
+            )
+            if package == "spine-openai":
+                interface = manifest["extensions"]["com.openai"]["interface"]
+                require(interface["developerName"] == "SpineDev", "Wrong OpenAI developer")
+                icon_paths = (interface["composerIcon"], interface["logo"])
+            else:
+                icon_paths = (manifest["icon"],)
+            for icon_path in icon_paths:
+                require(
+                    contained_path(package_root, icon_path).is_file(),
+                    f"Icon is not a file: {package}/{icon_path}",
+                )
             filename = ".mcp.json" if package == "spine-claude" else "mcp.json"
             config = dict(parsed[package_root / filename])
             config.pop("$schema", None)
@@ -98,7 +113,7 @@ def main():
                 "Unexpected OpenAI catalog policy",
             )
         else:
-            require(catalog["owner"]["name"] == "Spine", "Missing catalog owner")
+            require(catalog["owner"]["name"] == "SpineDev", "Wrong catalog owner")
         require(
             contained_path(ROOT, source_ref) == ROOT / "plugins" / package,
             f"Catalog resolves to the wrong package: {relative_path}",
