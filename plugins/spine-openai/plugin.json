@@ -1,0 +1,21 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "spine-openai",
+  "version": "0.1.0",
+  "description": "Open Spine knowledge-base links through its authorized MCP and follow the current server guide.",
+  "author": {
+    "name": "Spine"
+  },
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Spine",
+        "shortDescription": "Open Spine documents and follow their graph context",
+        "longDescription": "Use Spine links with the connected MCP, obtain its current guide, and work with documents in the user's requested scope.",
+        "developerName": "Spine",
+        "category": "Productivity",
+        "capabilities": ["Read", "Write"]
+      }
+    }
+  }
+}

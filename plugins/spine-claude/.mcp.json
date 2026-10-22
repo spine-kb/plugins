@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "spine": {
+      "type": "http",
+      "url": "https://spine.pavorik.com/mcp"
+    }
+  }
+}

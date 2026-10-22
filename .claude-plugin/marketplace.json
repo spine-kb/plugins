@@ -1,0 +1,13 @@
+{
+  "name": "spine-team-claude",
+  "owner": {
+    "name": "Spine"
+  },
+  "plugins": [
+    {
+      "name": "spine-claude",
+      "source": "./plugins/spine-claude",
+      "description": "Open Spine knowledge-base links and use the server's current guide."
+    }
+  ]
+}
