@@ -56,6 +56,14 @@ developer attribution nor an icon.
 Actual icon rendering in clients has not been verified. Icon delivery for a
 cloud custom MCP connection is independent of the packaged icons.
 
+In the Hatch workspace, the approved source and usage paths are recorded in
+`projects/spine/state/branding/README.md`. Copy its canonical `spine-icon.png`
+unchanged into both `plugins/spine-openai/assets/spine.png` and
+`plugins/spine-claude/assets/spine.png`. These packaged copies match the console
+favicon and MCP icon; do not select a logo from `misc` or historical OAuth
+drafts. The branding directory is maintained in Hatch, outside this standalone
+repository.
+
 ## Local installation for verification
 
 The commands below are instructions for a future, separately agreed test run.

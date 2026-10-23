@@ -1,10 +1,10 @@
 # Local package verification
 
-Status as of 2026-10-22: the adapters and documentation are in English, with
-SpineDev attribution in supported metadata and the original Spine PNG packaged
-for OpenAI and Claude. The packages have not been installed or behaviorally
-verified on client accounts. The current translation and branding changes remain
-local and have not been pushed.
+Status as of 2026-10-23: the adapters and documentation are in English, with
+SpineDev attribution in supported metadata and the corrected, cropped Spine PNG
+packaged for OpenAI and Claude. The packages have not been installed or
+behaviorally verified on client accounts. The icon correction is published in
+the repository; unrelated local bootstrap changes are excluded.
 
 During initial preparation, a read-only inspection of the available
 authenticated ChatGPT UI covered the Add menu and custom MCP form without
@@ -89,7 +89,7 @@ Initial preparation acceptance results:
 - Package contents reviewed: no secrets, static bearer credentials, `.app.json`,
   or placeholder app IDs. The manifests use relative sources, which exist.
 
-## Current translation and branding checks
+## Historical translation and branding checks (2026-10-22)
 
 The completed local checks after the translation and branding changes passed:
 
@@ -109,6 +109,25 @@ actual rendering remains unverified. Claude Code ignores its directory listing
 icon at runtime; older versions may warn about the field. Antigravity keeps its
 minimal documented manifest. See the
 [branding details](../README.md#developer-and-icons).
+
+## Corrected icon checks (2026-10-23)
+
+The previous packaged image was the wrong logo. Both packaged PNGs now exactly
+copy the approved, centered 512×512 RGBA icon from the Hatch workstation path
+`projects/spine/state/branding/spine-icon.png`. Its SHA-256 is
+`8e27c0a1e58311c9837f4d3fb501351741f36aa243a938dbd3c43c9e93cb5c14`. The original
+and usage paths are recorded in the adjacent Hatch branding README; they are not
+an installation dependency of this standalone repository.
+
+- Both package copies are byte-identical to the canonical icon. OpenAI's
+  `composerIcon` and `logo` resolve to its one packaged copy; Claude's `icon`
+  resolves to its matching copy. Manifest paths are unchanged.
+- `uv run --no-project --with jsonschema scripts/validate.py` passed on the
+  isolated publication tree: 8 JSON files, both downloaded schemas, 3 MCP
+  adapters, 2 catalogs, and 4 identical skills. Only schema endpoints were
+  contacted.
+- `DENO_NO_PACKAGE_JSON=1 deno fmt --check .` and `git diff --check` passed.
+- Client installation and actual icon rendering remain unverified.
 
 ## Behavioral testing after installation
 
