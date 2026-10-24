@@ -12,7 +12,7 @@ from jsonschema.validators import validator_for
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ENDPOINT = "https://spine.pavorik.com/mcp"
+ENDPOINT = "https://app.spine-kb.com/mcp"
 PACKAGES = ("spine-openai", "spine-claude", "spine-antigravity")
 
 

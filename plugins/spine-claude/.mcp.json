@@ -2,7 +2,7 @@
   "mcpServers": {
     "spine": {
       "type": "http",
-      "url": "https://spine.pavorik.com/mcp"
+      "url": "https://app.spine-kb.com/mcp"
     }
   }
 }

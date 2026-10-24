@@ -1,5 +1,44 @@
 # Local package verification
 
+## Current target (2026-10-24)
+
+The former production deployment is gone. Packages target
+`https://app.spine-kb.com/mcp` and private `/b/BASE/d/...` URLs. Earlier
+connected reads below describe historical evidence, not a live current
+connection. New OAuth, installation and runtime behavior must be checked after
+deployment.
+
+The canonical skill now uses `spine_bases` and `spine_bootstrap` for multiple
+bases and base-local personal documents. Public `/s/` links remain a separate
+scope. No client installations, real-account authentication or production calls
+were performed for this change.
+
+## Shared-app package checks (2026-10-24)
+
+`uv run --no-project --with jsonschema scripts/validate.py` passed after the
+endpoint/skill changes: 8 JSON files, both fetched official schemas, 3 MCP
+adapters, 2 catalogs and 4 byte-identical skill copies. The expected endpoint is
+now `https://app.spine-kb.com/mcp`. OpenAI and Claude package versions are
+0.2.0; no unsupported version field was added to the minimal Antigravity
+manifest. `DENO_NO_PACKAGE_JSON=1 deno fmt --check .` and `git diff --check`
+passed. Only official schema endpoints were contacted by these package checks.
+
+The canonical skill covers explicit and unambiguous base selection, one-base
+auto-selection, refusal without fallback, base-switch bootstrap, full personal
+body reading and revision-triggered rereading. It preserves current technical
+guide loading, public-token separation, task authorization and final result-link
+instructions. Earlier related uncommitted interaction/link guidance was retained
+in the canonical source and all three adapters as part of the coherent wave.
+Static checks prove packaging and equality, not actual model compliance.
+
+The backend's synthetic SQL and real SDK/HTTP checks validate the server-side
+multi-base/bootstrap contract separately; console browser checks validate its
+base routes. No new package was installed in Codex, Claude or Gemini and no real
+OAuth/client account was used. After deployment, verify installation, selected
+base, initial context, changed revision, no fallback and mobile behaviour on
+each supported client surface. Historical evidence below does not establish the
+new endpoint's availability.
+
 Status as of 2026-10-23: the adapters and documentation are in English, with
 SpineDev attribution in supported metadata and the corrected, cropped Spine PNG
 packaged for OpenAI and Claude. The packages have not been installed or

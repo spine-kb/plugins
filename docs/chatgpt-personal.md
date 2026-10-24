@@ -1,5 +1,9 @@
 # ChatGPT: personal accounts
 
+The target below is for the new app. The former deployment is gone; connect
+after the new app is deployed and available. No new client authentication has
+been verified.
+
 Employees have separate personal accounts. A shared workspace here would mean a
 ChatGPT organization with an administrator and a managed catalog; the selected
 setup does not assume one.
@@ -8,8 +12,8 @@ setup does not assume one.
 
 The current official developer flow describes creating a connection in ChatGPT
 web: Plugins → Add custom MCP server → name Spine → URL
-`https://spine.pavorik.com/mcp` → OAuth → Create as a plugin → Install. Then
-open a new chat and select `@Spine`. This is the documented procedure.
+`https://app.spine-kb.com/mcp` → OAuth → Create as a plugin → Install. Then open
+a new chat and select `@Spine`. This is the documented procedure.
 [Add custom MCP server](https://developers.openai.com/api/docs/guides/custom-mcp-server).
 
 A read-only inspection of the available account's authenticated UI on 2026-10-22

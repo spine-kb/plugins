@@ -11,9 +11,9 @@ developer's machine does not confirm access from a cloud interface. The HTTPS
 commands below assume the repository is accessible; a private repository
 requires authentication supported by the client.
 
-The configured endpoint is `https://spine.pavorik.com/mcp`. A direct read
-through the existing connected Spine MCP succeeded in this Codex session; this
-did not install or test these adapters. New OAuth flows, package installation,
+The configured target endpoint is `https://app.spine-kb.com/mcp`. The former
+standalone deployment is gone. This endpoint is configuration for the new app,
+not evidence that it has been deployed. New OAuth flows, package installation,
 bootstrap delivery, and behavior across client surfaces remain **unverified**.
 The package files do not include server configuration or deployment. See
 [verification details](docs/verification.md).
@@ -21,11 +21,24 @@ The package files do not include server configuration or deployment. See
 ## What gets installed
 
 The package combines a remote MCP declaration with a short English skill. The
-skill activates for a private `spine.pavorik.com/d/...` link or a request to
-work with the Spine KB, calls `doc_open`, retrieves the current server guide,
-and reads related documents as needed for the task. The server supplies the
-architecture, graph permissions, and body syntax. Users complete OAuth with
-their own Spine accounts; installing a package grants no additional permissions.
+skill activates for a private `app.spine-kb.com/b/BASE/d/...` link or a request
+to work with the Spine KB. With a URL it calls `doc_open`; without one it loads
+the current core guide directly. It resolves the target base and reads the
+account’s base-local personal document through `spine_bootstrap`. It reads
+related documents as needed for the task and owns user interaction guidance,
+including clickable final result links and honest limitations. The server
+supplies technical contracts for the architecture, graph permissions, body
+syntax, writes, and media transfer. Users complete OAuth with their own Spine
+accounts; installing a package grants no additional permissions.
+
+One connection can work with several bases. A complete private link or an
+explicit `base_id` identifies the base; one admissible base needs no extra
+question. Ambiguous multi-base tasks require clarification, and refusal for an
+explicit base never falls back to another. `spine_bases` lists the admissible
+bases; `spine_bootstrap` returns the selected base and personal instructions
+with body, revision and canonical URL. On a base switch, read that base's
+document; reread after a reported revision change. There are no read-block
+gates.
 
 The canonical text is [bootstrap/spine/SKILL.md](bootstrap/spine/SKILL.md). The
 three adapters contain exact copies. After changing the source, update all three

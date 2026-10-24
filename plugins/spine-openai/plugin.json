@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "spine-openai",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Open Spine knowledge-base links through its authorized MCP and follow the current server guide.",
   "author": {
     "name": "SpineDev"

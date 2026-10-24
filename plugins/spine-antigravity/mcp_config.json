@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "spine": {
-      "serverUrl": "https://spine.pavorik.com/mcp"
+      "serverUrl": "https://app.spine-kb.com/mcp"
     }
   }
 }
