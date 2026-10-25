@@ -11,13 +11,13 @@ includes the same short skill for working with Spine.
 
 ## Choose your agent
 
-| Agent                        | Install from                                           | Package             |
-| ---------------------------- | ------------------------------------------------------ | ------------------- |
-| Codex / OpenAI local desktop | OpenAI marketplace: `.agents/plugins/marketplace.json` | `spine-openai`      |
-| Claude and Claude Code       | Claude marketplace: `.claude-plugin/marketplace.json`  | `spine-claude`      |
-| Antigravity CLI              | Local plugin folder from this repository               | `spine-antigravity` |
-| ChatGPT web                  | [Custom MCP connection](docs/chatgpt-personal.md)      | Account setup       |
-| Gemini web/mobile            | [Custom app connection](docs/gemini-personal.md)       | Account setup       |
+| Agent                        | Install from                                           | Package       |
+| ---------------------------- | ------------------------------------------------------ | ------------- |
+| Codex / OpenAI local desktop | OpenAI marketplace: `.agents/plugins/marketplace.json` | `spine`       |
+| Claude and Claude Code       | Claude marketplace: `.claude-plugin/marketplace.json`  | `spine`       |
+| Antigravity CLI              | Local plugin folder from this repository               | `spine`       |
+| ChatGPT web                  | [Custom MCP connection](docs/chatgpt-personal.md)      | Account setup |
+| Gemini web/mobile            | [Custom app connection](docs/gemini-personal.md)       | Account setup |
 
 Both marketplaces use the ID `spine-kb`; each client reads its own catalog and
 package format. The OpenAI marketplace appears as **SpineKb**. Antigravity
@@ -75,7 +75,7 @@ For a local Claude Code installation, use:
 
 ```sh
 claude plugin marketplace add spine-kb/plugins
-claude plugin install spine-claude@spine-kb
+claude plugin install spine@spine-kb
 ```
 
 This CLI installation stays local; it does not install the plugin in your
@@ -121,9 +121,11 @@ Refresh the marketplace and update the installed package using your client's
 plugin controls. For Claude account installs, use **Check for updates** in the
 marketplace controls. Reconnect Spine if the client requests authorization.
 
-If you used the earlier team catalogs or the former production host, follow the
-[migration guide](docs/migration.md). The new catalogs use `spine-kb`; plugin
-names remain `spine-openai`, `spine-claude`, and `spine-antigravity`.
+All three adapters now use the plugin name `spine`. If you installed a package
+with a provider suffix, used the earlier team catalogs, or connected to the
+former production host, follow the [migration guide](docs/migration.md). The
+catalogs still use `spine-kb`; provider suffixes remain only in this
+repository's adapter directory names.
 
 ## Maintaining the packages
 

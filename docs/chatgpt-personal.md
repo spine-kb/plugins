@@ -22,11 +22,11 @@ MCP option is unavailable, check the current client requirements.
 
 ## What this connection includes
 
-The Git marketplace in this repository provides the `spine-openai` package for
-local clients. Adding a custom MCP server in ChatGPT is a separate setup path;
-it does not establish that the repository's bootstrap skill was installed. Web
-archive import, independent-account installation, mobile availability, and
-bootstrap delivery have not been verified for this release. See the
+The Git marketplace in this repository provides the `spine` package for local
+clients. Adding a custom MCP server in ChatGPT is a separate setup path; it does
+not establish that the repository's bootstrap skill was installed. Web archive
+import, independent-account installation, mobile availability, and bootstrap
+delivery have not been verified for this release. See the
 [verification record](verification.md).
 
 Use an explicit Spine selection while checking the connection. Verify both a

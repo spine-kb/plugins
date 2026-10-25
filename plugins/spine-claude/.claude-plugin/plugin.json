@@ -1,7 +1,7 @@
 {
-  "name": "spine-claude",
+  "name": "spine",
   "displayName": "Spine",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Read, write, and navigate your Spine knowledge bases with Claude.",
   "author": {
     "name": "SpineDev"

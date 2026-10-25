@@ -14,6 +14,7 @@ from jsonschema.validators import validator_for
 ROOT = Path(__file__).resolve().parents[1]
 ENDPOINT = "https://app.spine-kb.com/mcp"
 MARKETPLACE_ID = "spine-kb"
+PLUGIN_ID = "spine"
 PACKAGES = ("spine-openai", "spine-claude", "spine-antigravity")
 
 
@@ -62,7 +63,7 @@ def main():
             ".claude-plugin/plugin.json" if package == "spine-claude" else "plugin.json"
         )
         manifest = parsed[manifest_path]
-        require(manifest["name"] == package, f"Wrong plugin identity: {package}")
+        require(manifest["name"] == PLUGIN_ID, f"Wrong plugin identity: {package}")
         if package == "spine-antigravity":
             require(
                 set(manifest) == {"name", "description"},
@@ -109,7 +110,7 @@ def main():
             )
         require(len(catalog["plugins"]) == 1, f"Unexpected entries: {relative_path}")
         entry = catalog["plugins"][0]
-        require(entry["name"] == package, f"Wrong catalog target: {relative_path}")
+        require(entry["name"] == PLUGIN_ID, f"Wrong catalog target: {relative_path}")
         source_ref = entry["source"]
         if isinstance(source_ref, dict):
             require(source_ref["source"] == "local", "Catalog requires local sources")

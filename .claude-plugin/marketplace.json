@@ -6,7 +6,7 @@
   },
   "plugins": [
     {
-      "name": "spine-claude",
+      "name": "spine",
       "source": "./plugins/spine-claude",
       "description": "Read, write, and navigate your Spine knowledge bases with Claude."
     }

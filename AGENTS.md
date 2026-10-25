@@ -4,8 +4,11 @@ This standalone repository is `https://github.com/spine-kb/plugins`. It
 distributes client-specific packages for Spine users through separate OpenAI and
 Claude marketplaces; both use the identifier `spine-kb`. OpenAI's marketplace
 display name is `SpineKb`. Claude has no separate marketplace display-name
-field; use `SpineKb` in its description. Package identities remain
-`spine-openai`, `spine-claude`, and `spine-antigravity`.
+field; use `SpineKb` in its description. All three package identities are
+`spine`; provider suffixes belong only to the adapter directories
+`plugins/spine-openai`, `plugins/spine-claude`, and `plugins/spine-antigravity`.
+Keep catalog entry names aligned with the manifest identity, independently of
+their source directory names.
 
 Write user-facing documentation in English for people connecting their own Spine
 accounts. Keep installation instructions in README and client guides; maintainer

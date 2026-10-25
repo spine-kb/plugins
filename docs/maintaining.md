@@ -8,11 +8,12 @@ knowledge-base content live outside this repository.
 ## Package layout
 
 - `.agents/plugins/marketplace.json`: OpenAI catalog, ID `spine-kb`, display
-  name `SpineKb`, exposing `spine-openai`.
+  name `SpineKb`, exposing `spine` from `plugins/spine-openai/`.
 - `.claude-plugin/marketplace.json`: Claude catalog, ID `spine-kb`, exposing
-  `spine-claude`. Claude does not define a separate marketplace display-name
-  field; its description names `SpineKb`.
-- `plugins/spine-antigravity/`: local-folder adapter for Antigravity.
+  `spine` from `plugins/spine-claude/`. Claude does not define a separate
+  marketplace display-name field; its description names `SpineKb`.
+- `plugins/spine-antigravity/`: local-folder adapter for Antigravity, named
+  `spine`.
 - `bootstrap/spine/SKILL.md`: canonical English skill, copied byte-for-byte to
   `plugins/<package>/skills/spine/SKILL.md` in all three adapters.
 
@@ -23,10 +24,18 @@ permissions, document syntax, writes, and media come from the server guides. The
 adapters contain no shell hooks, local MCP processes, static credentials, or
 OpenAI app IDs. Installing a package grants no Spine permissions.
 
-OpenAI and Claude package versions are `0.3.0`. Antigravity keeps its minimal
+All three manifests use `name: spine`; the provider suffix distinguishes only
+the adapter directory. Catalog entries use the same `spine` identity while their
+source paths retain the provider suffix. OpenAI uses the manifest name as the
+plugin identifier and component namespace, so a provider suffix there also
+reaches skill names. See the
+[official package guidance](https://developers.openai.com/plugins/build/plugins).
+
+OpenAI and Claude package versions are `0.4.0`. Antigravity keeps its minimal
 manifest with only `name` and `description`; do not add an unsupported version
-field. Marketplace renaming requires the [migration steps](migration.md), even
-when the package names stay unchanged.
+field. Existing installations with provider-suffixed names require the
+[migration steps](migration.md); refreshing a catalog does not establish that
+the renamed plugin has been installed.
 
 No license has been selected or added to this repository.
 

@@ -5,7 +5,7 @@
   },
   "plugins": [
     {
-      "name": "spine-openai",
+      "name": "spine",
       "source": {
         "source": "local",
         "path": "./plugins/spine-openai"

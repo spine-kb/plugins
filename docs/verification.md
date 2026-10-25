@@ -15,8 +15,9 @@ on 2026-10-25 confirmed `private: false` and default branch `main`; SSH
 OpenAI and Claude retain separate catalogs with ID `spine-kb`. OpenAI's
 marketplace title is `SpineKb`; Claude uses that branding in its description
 because its catalog has no separate marketplace display-name field. The OpenAI
-and Claude packages are now `0.3.0`. Existing installations need the
-[migration steps](migration.md).
+and Claude packages are now `0.4.0`, with manifest identity `spine` in all three
+adapters. Provider suffixes remain in adapter directory names. Existing
+installations need the [migration steps](migration.md).
 
 Earlier connected reads below are historical evidence, not a verified connection
 to this production app. New OAuth, client installation, bootstrap delivery,
@@ -26,6 +27,32 @@ The canonical skill now uses `spine_bases` and `spine_bootstrap` for multiple
 bases and base-local personal documents. Public `/s/` links remain a separate
 scope. No client installations, real-account authentication or production calls
 were performed for this change.
+
+## Plugin identity rename (2026-10-25)
+
+The owner reported that the installed OpenAI package appeared as
+`@Spine-Openai`. Its manifest already had display name `Spine`, while the
+manifest identity was `spine-openai`; this session also exposed the skill as
+`spine-openai:spine`. All three adapters now use manifest identity `spine`, and
+both catalog entries target that identity. The OpenAI and Claude versions are
+`0.4.0`; Antigravity retains its unversioned minimal manifest. Source paths, MCP
+configuration, the canonical skill, and icons are unchanged.
+
+- `uv run --no-project --with jsonschema scripts/validate.py` passed: both
+  downloaded official schemas, 8 JSON files, 3 MCP adapters, 2 catalogs, and 4
+  byte-identical skills. The validator checks `spine` as the shared manifest and
+  catalog identity while retaining the provider-specific source-path checks.
+- `DENO_NO_PACKAGE_JSON=1 deno fmt --check .` passed for 19 Markdown/JSON files;
+  `git diff --check` passed. Four existing workspace warnings about missing
+  `exports` in backend manifests are unrelated to these packages.
+- The package diff contains only the three manifests: skills, MCP configuration,
+  and icons are unchanged. Current installation instructions use `spine`; old
+  identities appear only in migration guidance and historical evidence.
+
+No client installation, OAuth, production request, or desktop mention check was
+performed for the rename. The expected shorter namespace still needs
+verification after publication and installation. Existing packages require the
+[migration steps](migration.md).
 
 ## Public package refactor checks (2026-10-25)
 
