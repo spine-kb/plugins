@@ -1,144 +1,132 @@
-# Spine: team packages
+# Spine plugins
 
-Packages for employees' separate personal accounts. The source is
-[spine-kb/team-plugins](https://github.com/spine-kb/team-plugins), an
-independent Git repository. The packages are not installed; their behavior on
-accounts has not yet been verified.
+Connect your AI agent to [Spine](https://spine-kb.com) to read, write, and
+navigate your knowledge bases. Share a document link, explore related documents,
+or ask your agent to create and update content using your Spine account.
 
-To install a package, the repository must be accessible to the specific account
-and client. Its public visibility has not been confirmed. SSH access from the
-developer's machine does not confirm access from a cloud interface. The HTTPS
-commands below assume the repository is accessible; a private repository
-requires authentication supported by the client.
+This public repository, [spine-kb/plugins](https://github.com/spine-kb/plugins),
+provides separate importable marketplaces for OpenAI and Claude, plus an
+Antigravity package. Each adapter connects to `https://app.spine-kb.com/mcp` and
+includes the same short skill for working with Spine.
 
-The configured target endpoint is `https://app.spine-kb.com/mcp`. The former
-standalone deployment is gone. This endpoint is configuration for the new app,
-not evidence that it has been deployed. New OAuth flows, package installation,
-bootstrap delivery, and behavior across client surfaces remain **unverified**.
-The package files do not include server configuration or deployment. See
-[verification details](docs/verification.md).
+## Choose your agent
 
-## What gets installed
+| Agent                        | Install from                                           | Package             |
+| ---------------------------- | ------------------------------------------------------ | ------------------- |
+| Codex / OpenAI local desktop | OpenAI marketplace: `.agents/plugins/marketplace.json` | `spine-openai`      |
+| Claude and Claude Code       | Claude marketplace: `.claude-plugin/marketplace.json`  | `spine-claude`      |
+| Antigravity CLI              | Local plugin folder from this repository               | `spine-antigravity` |
+| ChatGPT web                  | [Custom MCP connection](docs/chatgpt-personal.md)      | Account setup       |
+| Gemini web/mobile            | [Custom app connection](docs/gemini-personal.md)       | Account setup       |
 
-The package combines a remote MCP declaration with a short English skill. The
-skill activates for a private `app.spine-kb.com/b/BASE/d/...` link or a request
-to work with the Spine KB. With a URL it calls `doc_open`; without one it loads
-the current core guide directly. It resolves the target base and reads the
-account’s base-local personal document through `spine_bootstrap`. It reads
-related documents as needed for the task and owns user interaction guidance,
-including clickable final result links and honest limitations. The server
-supplies technical contracts for the architecture, graph permissions, body
-syntax, writes, and media transfer. Users complete OAuth with their own Spine
-accounts; installing a package grants no additional permissions.
+Both marketplaces use the ID `spine-kb`; each client reads its own catalog and
+package format. The OpenAI marketplace appears as **SpineKb**. Antigravity
+currently supports only its official named marketplace, so use the local-folder
+installation below. ChatGPT web and Gemini use separate account connections.
 
-One connection can work with several bases. A complete private link or an
-explicit `base_id` identifies the base; one admissible base needs no extra
-question. Ambiguous multi-base tasks require clarification, and refusal for an
-explicit base never falls back to another. `spine_bases` lists the admissible
-bases; `spine_bootstrap` returns the selected base and personal instructions
-with body, revision and canonical URL. On a base switch, read that base's
-document; reread after a reported revision change. There are no read-block
-gates.
+The installation paths below follow the clients' documentation. End-to-end
+installation and OAuth with the new production app have not yet been verified in
+these clients. See [verification status](docs/verification.md).
 
-The canonical text is [bootstrap/spine/SKILL.md](bootstrap/spine/SKILL.md). The
-three adapters contain exact copies. After changing the source, update all three
-copies and run the checks below. The packages do not use shell hooks, local MCP
-processes, static tokens, or OpenAI app IDs.
+## Before you connect
 
-| Client                                      | Package and catalog                                        | Installation                                                                                            |
-| ------------------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| Codex CLI / local desktop                   | `plugins/spine-openai`, `.agents/plugins/marketplace.json` | Add a Git/local marketplace, install the package, authenticate                                          |
-| Claude personal web/desktop/mobile and Code | `plugins/spine-claude`, `.claude-plugin/marketplace.json`  | Add the marketplace through the web/desktop account, install the package, add and connect the connector |
-| Antigravity CLI                             | `plugins/spine-antigravity`                                | Install the local folder after cloning, authenticate                                                    |
-| ChatGPT personal web/mobile                 | [Separate account setup](docs/chatgpt-personal.md)         | A universal cloud package has not yet been built; cross-account installation needs verification         |
-| Gemini personal web/mobile                  | [Direct URL connection](docs/gemini-personal.md)           | Each user adds a custom app in web and authenticates                                                    |
+Sign in at [app.spine-kb.com](https://app.spine-kb.com) and make sure your
+account can access the base you want to use. During setup, sign in to Spine and
+complete OAuth for your own account. A plugin installation does not grant access
+to someone else's bases or documents. Your agent works within the permissions
+you authorize.
 
-## Developer and icons
+## Codex / OpenAI local desktop
 
-The developer name is **SpineDev**; the product name remains **Spine**. The
-OpenAI adapter declares the supplied Spine logo as its interface logo and
-composer icon. The Claude adapter declares the same logo for its directory
-listing; Claude Code ignores this field at runtime, and versions earlier than
-2.1.281 may warn about an unknown `icon` field. The minimal documented
-Antigravity manifest has only `name` and `description`, so it declares neither
-developer attribution nor an icon.
-[OpenAI icons](https://developers.openai.com/plugins/deploy/submission#icons-and-screenshots),
-[Claude directory listing fields](https://code.claude.com/docs/en/plugins/manifest-reference#directory-listing-fields),
-[Antigravity manifest](https://www.antigravity.google/docs/plugins?tab=cli).
-
-Actual icon rendering in clients has not been verified. Icon delivery for a
-cloud custom MCP connection is independent of the packaged icons.
-
-In the Hatch workspace, the approved source and usage paths are recorded in
-`projects/spine/state/branding/README.md`. Copy its canonical `spine-icon.png`
-unchanged into both `plugins/spine-openai/assets/spine.png` and
-`plugins/spine-claude/assets/spine.png`. These packaged copies match the console
-favicon and MCP icon; do not select a logo from `misc` or historical OAuth
-drafts. The branding directory is maintained in Hatch, outside this standalone
-repository.
-
-## Local installation for verification
-
-The commands below are instructions for a future, separately agreed test run.
-They were not executed while preparing the packages. From `team-plugins`:
+Register the marketplace:
 
 ```sh
-codex plugin marketplace add .
-codex
-# In Codex, open /plugins, select Spine team · Codex, and install Spine.
+codex plugin marketplace add spine-kb/plugins
 ```
 
-Add the GitHub source with `codex plugin marketplace add spine-kb/team-plugins`.
-[Official format and CLI](https://developers.openai.com/plugins/build/plugins).
+Open Plugins in the ChatGPT desktop app, select **SpineKb**, install **Spine**,
+and complete authentication. Start a new conversation after installation.
+[Official marketplace setup](https://developers.openai.com/plugins/build/plugins).
 
-For all Claude surfaces, start in web/desktop: Customize → Plugins → Add → Add
-marketplace → `https://github.com/spine-kb/team-plugins` → add Spine. In the
-package's Connectors tab, add/connect Spine and complete OAuth. Installation
-from the account UI carries over to mobile and Claude Code on the same account;
-installation only through the Code CLI does not carry back to claude.ai. The
-local folder can be checked separately with
-`claude plugin validate ./plugins/spine-claude`, if Claude Code is installed.
-[Installation and sync](https://claude.com/docs/plugins/overview),
-[remote connector format](https://claude.com/docs/plugins/build).
-
-For Antigravity, clone the repository and install the adapter from its folder:
+To refresh the registered source:
 
 ```sh
-git clone https://github.com/spine-kb/team-plugins.git
-cd team-plugins
+codex plugin marketplace upgrade spine-kb
+```
+
+Check the installed plugin in the desktop app after refreshing; a marketplace
+refresh alone does not verify installation or authentication.
+
+## Claude
+
+In Claude web or desktop, open **Customize → Plugins → Add → Add marketplace**
+and enter:
+
+```text
+https://github.com/spine-kb/plugins
+```
+
+Add **Spine**. Open the plugin's **Connectors** tab, add or connect Spine, and
+complete OAuth. Account-installed plugins are documented to carry over to mobile
+and Claude Code on the same account. Client and organization policies still
+apply. [Claude installation and sync](https://claude.com/docs/plugins/overview).
+
+For a local Claude Code installation, use:
+
+```sh
+claude plugin marketplace add spine-kb/plugins
+claude plugin install spine-claude@spine-kb
+```
+
+This CLI installation stays local; it does not install the plugin in your
+claude.ai account.
+[Claude Code commands](https://code.claude.com/docs/en/plugins/cli-reference).
+
+## Antigravity CLI
+
+Clone the repository and install its Antigravity adapter:
+
+```sh
+git clone https://github.com/spine-kb/plugins.git
+cd plugins
 agy plugin install ./plugins/spine-antigravity
 ```
 
-For a CLI with SSH access configured, use:
-`git clone git@github.com:spine-kb/team-plugins.git`.
+Complete Spine authentication when prompted. The clone-and-folder route selects
+the correct adapter from this repository's multiple packages.
+[Antigravity installation](https://antigravity.google/docs/marketplace?tab=cli).
 
-Antigravity documents GitHub and local installation. For this repository with
-multiple adapters, use a clone and local folder: installing a GitHub
-subdirectory separately has not been confirmed. Arbitrary named marketplaces are
-currently unsupported.
-[Documentation](https://antigravity.google/docs/marketplace?tab=cli).
+## Try Spine
 
-## Checks before installation
+Start a new conversation and ask your agent:
 
-From `team-plugins`:
+- “Use Spine to summarize this document: …” followed by its private link.
+- “Use Spine to explain the context linked from this document: …”
+- “Use Spine to update this document with the following changes: …”
 
-```sh
-uv run --no-project --with jsonschema scripts/validate.py
-DENO_NO_PACKAGE_JSON=1 deno fmt --check .
-```
+Select the installed Spine plugin explicitly if your client does not activate it
+automatically. Copy a private document link from the app; these links use
+`https://app.spine-kb.com/b/BASE/d/ID` and may include navigation context.
+Public `/s/` share links are not supported by the current plugin opener.
 
-The first command fetches only two public Agent Plugins schemas; it does not
-call the Spine endpoint. It checks JSON, MCP configurations, relative catalog
-paths, and matching skills. Results and limitations are in
-[docs/verification.md](docs/verification.md). After installation, a separate
-client test run should check OAuth, a bare link, a link with a task, an explicit
-request to Spine, and tool updates.
+One connection can work with several bases. A document link identifies its base;
+for a request without a link, name the base if you have several. The agent reads
+that base's personal instructions and the current Spine guide before continuing.
+When the task creates or changes documents, the result should include clickable
+links to them.
 
-## Remaining work before distribution
+## Updates and migration
 
-Publish the current local changes when requested, install the packages, and run
-the client tests. All catalog sources are relative; the manifests do not use app
-IDs. No license has been chosen or added to the packages. For ChatGPT personal,
-separately establish the supported cloud connection path and test an independent
-account. Access to the GitHub package and access to the KB are controlled
-independently.
+Refresh the marketplace and update the installed package using your client's
+plugin controls. For Claude account installs, use **Check for updates** in the
+marketplace controls. Reconnect Spine if the client requests authorization.
+
+If you used the earlier team catalogs or the former production host, follow the
+[migration guide](docs/migration.md). The new catalogs use `spine-kb`; plugin
+names remain `spine-openai`, `spine-claude`, and `spine-antigravity`.
+
+## Maintaining the packages
+
+See [maintainer instructions](docs/maintaining.md) for the canonical skill,
+adapter formats, branding, and validation commands, and
+[verification](docs/verification.md) for evidence and remaining client checks.

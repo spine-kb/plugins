@@ -1,17 +1,52 @@
 # Local package verification
 
-## Current target (2026-10-24)
+## Current production and distribution (2026-10-25)
 
-The former production deployment is gone. Packages target
-`https://app.spine-kb.com/mcp` and private `/b/BASE/d/...` URLs. Earlier
-connected reads below describe historical evidence, not a live current
-connection. New OAuth, installation and runtime behavior must be checked after
-deployment.
+Spine is deployed at `https://app.spine-kb.com`; the production MCP endpoint is
+`https://app.spine-kb.com/mcp`. Packages use that endpoint and private
+`/b/BASE/d/...` links. Deployment is recorded in Hatch's
+`projects/spine/eco/prod/DEPLOYMENT.md` and was confirmed by the owner. This
+package refactor did not make production requests or change the server.
+
+The public repository is now `https://github.com/spine-kb/plugins`, with local
+Hatch checkout `projects/spine/plugins/`. An unauthenticated GitHub API request
+on 2026-10-25 confirmed `private: false` and default branch `main`; SSH
+`ls-remote` resolved the renamed repository to the existing published head.
+OpenAI and Claude retain separate catalogs with ID `spine-kb`. OpenAI's
+marketplace title is `SpineKb`; Claude uses that branding in its description
+because its catalog has no separate marketplace display-name field. The OpenAI
+and Claude packages are now `0.3.0`. Existing installations need the
+[migration steps](migration.md).
+
+Earlier connected reads below are historical evidence, not a verified connection
+to this production app. New OAuth, client installation, bootstrap delivery,
+mobile behavior, and icon rendering remain unverified.
 
 The canonical skill now uses `spine_bases` and `spine_bootstrap` for multiple
 bases and base-local personal documents. Public `/s/` links remain a separate
 scope. No client installations, real-account authentication or production calls
 were performed for this change.
+
+## Public package refactor checks (2026-10-25)
+
+- `uv run --no-project --with jsonschema scripts/validate.py` passed: 8 JSON
+  files, both downloaded official schemas, 3 MCP adapters, 2 catalogs, and 4
+  byte-identical skills. The validator now also checks both marketplace IDs and
+  OpenAI's `SpineKb` display name.
+- `DENO_NO_PACKAGE_JSON=1 deno fmt --check .` passed for all 19 Markdown/JSON
+  files; `git diff --check` passed. The two existing backend workspace warnings
+  about missing `exports` remain unrelated to the packages.
+- Current installation and migration instructions were checked against the
+  official OpenAI, Claude, Antigravity, and Gemini documentation linked from
+  those guides. Claude Code is not installed, so native Claude validation and
+  all client installation/OAuth checks remain unperformed.
+- Package identities, the shared bootstrap, and approved icons were retained.
+  This change updates marketplace IDs, descriptions, versions, and public setup
+  documentation; it does not publish to an agent's public directory.
+
+- A local link check passed for 113 Markdown links across 20 package and Hatch
+  documents. Both packaged PNGs were also checked byte-for-byte against the
+  canonical Hatch icon. The former checkout and task paths are absent.
 
 ## Shared-app package checks (2026-10-24)
 
@@ -52,12 +87,11 @@ Spine endpoint during that preparation. A later attempt to open the ChatGPT
 Plugins page failed with "ChatGPT hit a snag"; web archive installation remains
 untested.
 
-The GitHub target `git@github.com:spine-kb/team-plugins.git` is accessible from
-this machine over SSH. It had no refs during initial preparation; a later
-`git ls-remote` check confirmed that `main` now exists. The initial
-unauthenticated GitHub API request returned 404; public visibility remains
-unconfirmed. Access for each account and cloud client is checked separately.
-Repository settings were not changed.
+During initial preparation under the former repository name, SSH access worked
+and a later `git ls-remote` check confirmed `main`. The initial unauthenticated
+GitHub API request returned 404, so visibility was unconfirmed at that time. The
+current public visibility is recorded above. These package changes did not alter
+repository settings.
 
 ## Direct connected MCP read
 
@@ -68,8 +102,8 @@ recorded here. No new OAuth flow, write, or client package installation
 occurred.
 
 This single read confirms access through that existing connection. It does not
-verify installation of the team-plugins adapters, bootstrap delivery, selection
-of `doc_open` from a bare link, web ZIP installation, independent personal
+verify installation of these adapters, bootstrap delivery, selection of
+`doc_open` from a bare link, web ZIP installation, independent personal
 accounts, mobile behavior, or icon rendering. The bootstrap skill already
 contains its domain trigger and was unchanged, but this session's skill catalog
 did not expose it. The cause of that installation or delivery gap remains
@@ -147,7 +181,7 @@ The packaged OpenAI icons and Claude directory listing icon are configured;
 actual rendering remains unverified. Claude Code ignores its directory listing
 icon at runtime; older versions may warn about the field. Antigravity keeps its
 minimal documented manifest. See the
-[branding details](../README.md#developer-and-icons).
+[branding details](maintaining.md#attribution-and-icons).
 
 ## Corrected icon checks (2026-10-23)
 
@@ -172,7 +206,7 @@ an installation dependency of this standalone repository.
 
 Record the client version, installation method, surface, and actual tool calls.
 Test a new chat, OAuth and reauthorization, a bare link, a link with a task, an
-explicit request to Spine, `/d/A/p/B`, access denial, tasks involving an agent,
-human, article, or draft, and metadata and guide updates. A public `/s/` token
-must not be silently replaced with personal reading access. Attachment transfer
-and large file upload are separate media scenarios.
+explicit request to Spine, `/b/BASE/d/A/p/B`, access denial, tasks involving an
+agent, human, article, or draft, and metadata and guide updates. A public `/s/`
+token must not be silently replaced with personal reading access. Attachment
+transfer and large file upload are separate media scenarios.

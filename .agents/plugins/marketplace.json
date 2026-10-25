@@ -1,7 +1,7 @@
 {
-  "name": "spine-team-openai",
+  "name": "spine-kb",
   "interface": {
-    "displayName": "Spine team · Codex"
+    "displayName": "SpineKb"
   },
   "plugins": [
     {

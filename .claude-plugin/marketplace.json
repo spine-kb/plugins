@@ -1,5 +1,6 @@
 {
-  "name": "spine-team-claude",
+  "name": "spine-kb",
+  "description": "SpineKb plugins for working with your Spine knowledge bases.",
   "owner": {
     "name": "SpineDev"
   },
@@ -7,7 +8,7 @@
     {
       "name": "spine-claude",
       "source": "./plugins/spine-claude",
-      "description": "Open Spine knowledge-base links and use the server's current guide."
+      "description": "Read, write, and navigate your Spine knowledge bases with Claude."
     }
   ]
 }

@@ -13,6 +13,7 @@ from jsonschema.validators import validator_for
 
 ROOT = Path(__file__).resolve().parents[1]
 ENDPOINT = "https://app.spine-kb.com/mcp"
+MARKETPLACE_ID = "spine-kb"
 PACKAGES = ("spine-openai", "spine-claude", "spine-antigravity")
 
 
@@ -97,6 +98,15 @@ def main():
         (".claude-plugin/marketplace.json", "spine-claude"),
     ):
         catalog = parsed[ROOT / relative_path]
+        require(
+            catalog["name"] == MARKETPLACE_ID,
+            f"Wrong marketplace identity: {relative_path}",
+        )
+        if package == "spine-openai":
+            require(
+                catalog["interface"]["displayName"] == "SpineKb",
+                "Wrong OpenAI marketplace display name",
+            )
         require(len(catalog["plugins"]) == 1, f"Unexpected entries: {relative_path}")
         entry = catalog["plugins"][0]
         require(entry["name"] == package, f"Wrong catalog target: {relative_path}")

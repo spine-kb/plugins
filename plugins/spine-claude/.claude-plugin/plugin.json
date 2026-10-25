@@ -1,8 +1,8 @@
 {
   "name": "spine-claude",
   "displayName": "Spine",
-  "version": "0.2.0",
-  "description": "Open Spine knowledge-base links through its authorized MCP and follow the current server guide.",
+  "version": "0.3.0",
+  "description": "Read, write, and navigate your Spine knowledge bases with Claude.",
   "author": {
     "name": "SpineDev"
   },
